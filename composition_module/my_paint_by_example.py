@@ -197,7 +197,9 @@ def main_paint_by_example(img_p=None, ref_p=None, mask=None,gt_image=None, bbox=
     )
     parser.add_argument(
         "--plms",
-        action='store_true',
+        # action='store_true',
+        type=bool,
+        default=True,
         help="use plms sampling",
     )
     parser.add_argument(
@@ -315,9 +317,9 @@ def main_paint_by_example(img_p=None, ref_p=None, mask=None,gt_image=None, bbox=
     config_path = os.path.join(os.getcwd(),"composition_module","configs/v1.yaml")
     config = OmegaConf.load(config_path)   #f"{opt.config}")
     if ckpt_path:
-    	model = load_model_from_config(config, ckpt_path)
+        model = load_model_from_config(config, ckpt_path)
     else:
-    	model = load_model_from_config(config, f"{opt.ckpt}")
+        model = load_model_from_config(config, f"{opt.ckpt}")
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
     model = model.to(device)
     model.requires_grad_(True)

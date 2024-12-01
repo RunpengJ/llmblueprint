@@ -455,6 +455,7 @@ if __name__=="__main__":
     os.makedirs(conf.out_dir, exist_ok=True)
 
     ############################ first stage generation ###########################################
+    print("first stage generation")
     text_prompt = conf.prompt_info.text_prompt
     bg_prompt = conf.prompt_info.bg_prompt
     layout =  ast.literal_eval(conf.prompt_info.keypoints)
@@ -471,7 +472,7 @@ if __name__=="__main__":
 
     ########################### second stage generation ###########################################
 
-    
+    print("second stage generation")
     objects_dict_bboxes = dict(ast.literal_eval(response.split("\n")[0]))
     sorted_bbox_dict = dict(sorted(objects_dict_bboxes.items(), key=lambda item: item[1][2] * item[1][3], reverse=True))
 
