@@ -166,8 +166,6 @@ def get_tensor_clip(normalize=True, toTensor=True):
     return torchvision.transforms.Compose(transform_list)
   
     
-
-
 @torch.enable_grad()
 def main_paint_by_example(img_p=None, ref_p=None, mask=None,gt_image=None, bbox=None,text_desc=None,add_guidance=True,optim_steps=1,guidance_weight=200, ckpt_path=None):
     parser = argparse.ArgumentParser()
@@ -197,9 +195,9 @@ def main_paint_by_example(img_p=None, ref_p=None, mask=None,gt_image=None, bbox=
     )
     parser.add_argument(
         "--plms",
-        action='store_true',
-        # type=bool,
-        # default=True,
+        # action='store_true',
+        type=bool,
+        default=True,
         help="use plms sampling",
     )
     parser.add_argument(

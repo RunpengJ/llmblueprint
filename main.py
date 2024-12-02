@@ -337,8 +337,6 @@ def get_first_stage_generation(text_prompt,num_layouts=1,num_inference_steps=20,
 
 @backoff.on_exception(backoff.expo, openai.error.RateLimitError)
 def first_stage_gen_with_interpolation(text_prompt,num_layouts=3,num_inference_steps=20,seed=42):
-
-    img_list = []
     response_list = []
     count=0
     num_layouts=3
@@ -353,23 +351,17 @@ def first_stage_gen_with_interpolation(text_prompt,num_layouts=3,num_inference_s
                             {"role": "user", "content": form_prompt}
                         ]
                     )
-                    # print(response['choices'])
                     time.sleep(3)
                     if "Background prompt" in response['choices'][0]['message']['content']:
                         response_list.append(remove_newlines(response['choices'][0]['message']['content']))
-                        #print(remove_newlines(response['choices'][0]['message']['content']))
                         count+=1
                 except:
                     continue
         response = get_avg_boxes_with_bg(response_list)
     else:
-        #use default response 
         response =  text_prompt
-        # keypoint_sample = [('a Golden Retriever', [97, 280, 198, 132]), ('a white cat', [60, 240, 125, 76]), ('a wooden table', [184, 163, 144, 86]), ('a vase of vibrant flowers', [199, 67, 55, 110]), ('a sleek modern television', [391, 21, 101, 63])]
-        # response = [str(keypoint_sample) + "\n" + "Background prompt: In a cozy living room filled with a sense of companionship and relaxation"]
-            
-    gen_im = get_layout_to_image(response[0], seed=seed,
-                          )
+        
+    gen_im = get_layout_to_image(response[0], seed=seed, num_inference_steps=num_inference_steps)
 
     
     return gen_im,response[0]
