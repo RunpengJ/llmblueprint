@@ -1,6 +1,6 @@
 # composition_model_path: "/share/data/drive_1/hanan/llm_blueprint/paint_by_example/checkpoints/model.ckpt"
 composition_model_path: "C:\\Users\\Admin\\OneDrive\\Documents\\GitHub\\llmblueprint\\model.ckpt"
-out_dir: "./outputs/livingroom"
+out_dir: "./outputs/livingroom/plms"
 exp_name: "livingroom_1"
 
 prompt_info:
