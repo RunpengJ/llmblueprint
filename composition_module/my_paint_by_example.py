@@ -192,14 +192,14 @@ def main_paint_by_example(img_p=None, ref_p=None, mask=None,gt_image=None, bbox=
     parser.add_argument(
         "--ddim_steps",
         type=int,
-        default=50,
+        default=30,
         help="number of ddim sampling steps",
     )
     parser.add_argument(
         "--plms",
-        # action='store_true',
-        type=bool,
-        default=True,
+        action='store_true',
+        # type=bool,
+        # default=True,
         help="use plms sampling",
     )
     parser.add_argument(

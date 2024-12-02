@@ -95,16 +95,16 @@ def select_mask(masks, conf_scores, coarse_ious=None, rule="largest_over_conf", 
         # print(f"Confidences: {conf_scores}")
         print(f"Selected a mask with confidence: {selection_conf}, coarse_iou: {selection_coarse_iou}")
 
-    if verbose:
-        plt.figure(figsize=(10, 8))
-        # plt.suptitle("After SAM")
-        for ind in range(3):
-            plt.subplot(1, 3, ind+1)
-            # This is obtained before resize.
-            plt.title(f"Mask {ind}, score {scores[ind]}, conf {conf_scores[ind]:.2f}, iou {coarse_ious[ind] if coarse_ious is not None else None:.2f}")
-            plt.imshow(masks[ind])
-        plt.tight_layout()
-        plt.show()
+    # if verbose:
+    #     plt.figure(figsize=(10, 8))
+    #     # plt.suptitle("After SAM")
+    #     for ind in range(3):
+    #         plt.subplot(1, 3, ind+1)
+    #         # This is obtained before resize.
+    #         plt.title(f"Mask {ind}, score {scores[ind]}, conf {conf_scores[ind]:.2f}, iou {coarse_ious[ind] if coarse_ious is not None else None:.2f}")
+    #         plt.imshow(masks[ind])
+    #     plt.tight_layout()
+    #     plt.show()
 
     return mask, selection_conf
 

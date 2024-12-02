@@ -444,7 +444,6 @@ def iterative_refinement(first_stage_gen, objects_dict_bboxes,objects_dict_desc,
 
 
 if __name__=="__main__":
-
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--config", type=str, default="./configs/livingroom_1.yaml")
@@ -453,7 +452,7 @@ if __name__=="__main__":
 
     conf = OmegaConf.load(args.config)
     os.makedirs(conf.out_dir, exist_ok=True)
-
+    start_time = time.time()
     ############################ first stage generation ###########################################
     print("first stage generation")
     text_prompt = conf.prompt_info.text_prompt
@@ -468,7 +467,8 @@ if __name__=="__main__":
         Image.fromarray(first_stage_image[0]).save(os.path.join(conf.out_dir, conf.exp_name + "_first_stage.png"))
         print("generation finished . . . check {} directory for outputs".format(conf.out_dir))
         exit()
-
+    first_stage_finished = time.time()
+    
 
     ########################### second stage generation ###########################################
 
@@ -489,3 +489,9 @@ if __name__=="__main__":
     pil_img.save(os.path.join(conf.out_dir,conf.exp_name +  "_second_stage.png"))
     first_phase_pil.save(os.path.join(conf.out_dir, conf.exp_name + "_first_stage.png"))
     print("generation finished . . . check {} directory for outputs".format(conf.out_dir))
+
+    second_stage_finished = time.time()
+
+print(f"First Stage takes: {first_stage_finished - start_time:.2f}s")
+print(f"Second Stage takes: {second_stage_finished - first_stage_finished:.2f}s")
+print(f"Generation completed in: {second_stage_finished - start_time:.2f}s")
